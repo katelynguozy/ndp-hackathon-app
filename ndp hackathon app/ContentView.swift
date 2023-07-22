@@ -9,18 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var homeScreen = true
+    @State private var screenNum = 1
+    @State private var buttons = [buttonStyle(buttonText: "Done", paddingAmount: <#T##Double#>), buttonStyle(buttonText: "Click to Start", paddingAmount: <#T##Double#>), buttonStyle(buttonText: "Finish Quiz", paddingAmount: <#T##Double#>)]
     
     var body: some View {
         VStack {
-            if homeScreen == true{
+            if screenNum == 1 {
                 Text("**THE NDP QUIZ**")
                     .padding()
                     .font(.system(.largeTitle, design: .rounded))
                     .foregroundColor(.red)
-                }
                 Button {
-                
+                    screenNum = 2
                 } label: {
                     Text("**Click to Start**")
                         .padding(30)
@@ -29,6 +29,7 @@ struct ContentView: View {
                         .cornerRadius(20)
                 }
             }
+        }
     }
 }
 
