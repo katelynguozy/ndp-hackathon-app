@@ -9,15 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var vstackShows = true
+    @State private var homeScreen = true
     
     var body: some View {
         VStack {
-            Text("**THE NDP QUIZ**")
-                .padding()
-                .font(.system(.largeTitle, design: .rounded))
-                .foregroundColor(.red)
-        }
+            if homeScreen == true{
+                Text("**THE NDP QUIZ**")
+                    .padding()
+                    .font(.system(.largeTitle, design: .rounded))
+                    .foregroundColor(.red)
+                }
+                Button {
+                
+                } label: {
+                    Text("**Click to Start**")
+                        .padding(30)
+                        .foregroundColor(.white)
+                        .background(.red)
+                        .cornerRadius(20)
+                }
+            }
     }
 }
 
