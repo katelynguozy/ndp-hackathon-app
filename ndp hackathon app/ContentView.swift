@@ -9,25 +9,36 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var screenNum = 1
-    @State private var buttons = [buttonStyle(buttonText: "Done", paddingAmount: <#T##Double#>), buttonStyle(buttonText: "Click to Start", paddingAmount: <#T##Double#>), buttonStyle(buttonText: "Finish Quiz", paddingAmount: <#T##Double#>)]
+    @State private var screenNum = 0
+    @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
     
     var body: some View {
         VStack {
-            if screenNum == 1 {
+            
+            if screenNum == 0 {
                 Text("**THE NDP QUIZ**")
                     .padding()
                     .font(.system(.largeTitle, design: .rounded))
                     .foregroundColor(.red)
-                Button {
-                    screenNum = 2
-                } label: {
-                    Text("**Click to Start**")
-                        .padding(30)
-                        .foregroundColor(.white)
-                        .background(.red)
-                        .cornerRadius(20)
-                }
+                
+                
+                
+                
+            } else if screenNum == 1 {
+                Text("**THE NDP QUIZ**")
+                    .padding()
+                    .font(.system(.largeTitle, design: .rounded))
+                    .foregroundColor(.red)
+            }
+            Button {
+                screenNum += 1
+            } label: {
+                Text("**\(buttons[screenNum].buttonText)**")
+                    .font(.title2)
+                    .padding(buttons[screenNum].paddingAmount)
+                    .foregroundColor(.white)
+                    .background(.red)
+                    .cornerRadius(20)
             }
         }
     }
