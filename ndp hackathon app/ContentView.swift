@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var vstackShows = true
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("**THE NDP QUIZ**")
+                .padding()
+                .font(.system(.largeTitle, design: .rounded))
+                .foregroundColor(.red)
         }
-        .padding()
     }
 }
 
