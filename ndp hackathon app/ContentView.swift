@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var textEntered = ""
+    @State private var nameEntered = ""
+    @State private var nricEntered = ""
+    @State private var ccnEntered = ""
     @State private var screenNum = 0
     @State private var difficulties = ["Foreigner", "Recent Citizen", "Average Singaporean", "Singapore Historian", "iBong 14 Pro Max"]
     @State private var difficultyLevel = ""
-    @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
+    @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done                                                                 ", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
     
     var body: some View {
         VStack {
@@ -24,11 +26,11 @@ struct ContentView: View {
                     .foregroundColor(.red)
                 Form {
                     Section("**WHO ARE YOU**"){
-                        TextField("Name", text: $textEntered)
+                        TextField("Name", text: $nameEntered)
                             .textFieldStyle(.roundedBorder)
-                        TextField("NRIC", text: $textEntered)
+                        TextField("NRIC", text: $nricEntered)
                             .textFieldStyle(.roundedBorder)
-                        TextField("Credit Card Number ", text: $textEntered)
+                        TextField("Credit Card Number", text: $ccnEntered)
                             .textFieldStyle(.roundedBorder)
                     }
                     Section("**Singlish-ness of quiz**") {
