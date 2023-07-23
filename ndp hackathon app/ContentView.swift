@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var textEntered = ""
-    @State private var difficulty = 5.0
     @State private var screenNum = 0
+    @State private var difficulties = ["Foreigner", "Recent Citizen", "Average Singaporean", "Singapore Historian", "iBong 14 Pro Max"]
+    @State private var difficultyLevel = ""
     @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
     
     var body: some View {
@@ -29,10 +30,15 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                         TextField("Credit Card Number ", text: $textEntered)
                             .textFieldStyle(.roundedBorder)
-                        // error below 
-                        Text("Difficulty level of quiz aka the Singaporean-ness of the Quiz")
-                        Slider(value:$difficulty, in: 0...5,)
-                        
+                    }
+                    Section("**Singlish-ness of quiz**") {
+                        Picker("How Singaporean do you think you are?", selection: $difficultyLevel) {
+                                                
+                                                //better, faster method
+                                                ForEach(difficulties, id:\.self) {
+                                                    Text($0)
+                                                }
+                                            }
                     }
                 }
                 
