@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var blackScreen = false
     @State private var difficulties = ["Foreigner", "Recent Citizen", "Average Singaporean", "Singapore Historian", "iBong 14 Pro Max"]
     @State private var difficultyLevel = ""
-    @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done                                                                 ", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
+    @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done                                                                 ", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz                                                     ", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
     
     var body: some View {
         ZStack {
@@ -50,10 +50,24 @@ struct ContentView: View {
                         .padding()
                         .font(.system(.largeTitle, design: .rounded))
                         .foregroundColor(.red)
+                } else if screenNum == 2 {
+                    Form {
+                        Section {
+                            
+                        }
+                    }
                 }
                 Button {
                     withAnimation {
                         screenNum += 1
+                    }
+                    if screenNum == 1 {
+                        blackScreen = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    blackScreen = false
+                                }
+                        }
                     }
                 } label: {
                     Text("**\(buttons[screenNum].buttonText)**")
@@ -64,11 +78,10 @@ struct ContentView: View {
                         .cornerRadius(20)
                 }
             }
-            if blackScreen == true {
-                Color(.black)
-            }
+            Color(red:0.1, green: 0, blue: 0)
+                .opacity(blackScreen ? 1 : 0)
         }
-        .background(blackScreen == true ? .black : Color(red: 1, green: 0.9, blue: 0.9))
+        .background(blackScreen == true ? Color(red: 0.1, green: 0, blue: 0) : Color(red: 1, green: 0.9, blue: 0.9))
     }
 }
 
