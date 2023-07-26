@@ -17,51 +17,53 @@ struct ContentView: View {
     @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done                                                                 ", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
     
     var body: some View {
-        VStack {
-            
-            if screenNum == 0 {
-                Text("**THE NDP QUIZ**")
-                    .padding()
-                    .font(.system(.largeTitle, design: .rounded))
-                    .foregroundColor(.red)
-                Form {
-                    Section("**WHO ARE YOU**"){
-                        TextField("Name", text: $nameEntered)
-                            .textFieldStyle(.roundedBorder)
-                        TextField("NRIC", text: $nricEntered)
-                            .textFieldStyle(.roundedBorder)
-                        TextField("Credit Card Number", text: $ccnEntered)
-                            .textFieldStyle(.roundedBorder)
+        ZStack {
+            VStack {
+                
+                if screenNum == 0 {
+                    Text("**THE NDP QUIZ**")
+                        .padding()
+                        .font(.system(.largeTitle, design: .rounded))
+                        .foregroundColor(.red)
+                    Form {
+                        Section("**WHO ARE YOU**"){
+                            TextField("Name", text: $nameEntered)
+                                .textFieldStyle(.roundedBorder)
+                            TextField("NRIC", text: $nricEntered)
+                                .textFieldStyle(.roundedBorder)
+                            TextField("Credit Card Number", text: $ccnEntered)
+                                .textFieldStyle(.roundedBorder)
+                        }
+                        Section("**Singlish-ness of quiz**") {
+                            Picker("How Singaporean do you think you are?", selection: $difficultyLevel) {
+                                ForEach(difficulties, id:\.self) {
+                                    Text($0)
+                                }
+                            }
+                        }
                     }
-                    Section("**Singlish-ness of quiz**") {
-                        Picker("How Singaporean do you think you are?", selection: $difficultyLevel) {
-                                                
-                                                //better, faster method
-                                                ForEach(difficulties, id:\.self) {
-                                                    Text($0)
-                                                }
-                                            }
-                    }
+                    .cornerRadius(35)
+                } else if screenNum == 1 {
+                    Text("**THE NDP QUIZ**")
+                        .padding()
+                        .font(.system(.largeTitle, design: .rounded))
+                        .foregroundColor(.red)
                 }
-                
-                
-            } else if screenNum == 1 {
-                Text("**THE NDP QUIZ**")
-                    .padding()
-                    .font(.system(.largeTitle, design: .rounded))
-                    .foregroundColor(.red)
-            }
-            Button {
-                screenNum += 1
-            } label: {
-                Text("**\(buttons[screenNum].buttonText)**")
-                    .font(.title2)
-                    .padding(buttons[screenNum].paddingAmount)
-                    .foregroundColor(.white)
-                    .background(.red)
-                    .cornerRadius(20)
+                Button {
+                    withAnimation {
+                        screenNum += 1
+                    }
+                } label: {
+                    Text("**\(buttons[screenNum].buttonText)**")
+                        .font(.title2)
+                        .padding(buttons[screenNum].paddingAmount)
+                        .foregroundColor(.white)
+                        .background(.red)
+                        .cornerRadius(20)
+                }
             }
         }
+        .background(Color(red: 1, green: 0.9, blue: 0.9))
     }
 }
 
