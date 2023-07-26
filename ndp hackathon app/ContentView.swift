@@ -12,12 +12,14 @@ struct ContentView: View {
     @State private var nricEntered = ""
     @State private var ccnEntered = ""
     @State private var screenNum = 0
+    @State private var blackScreen = false
     @State private var difficulties = ["Foreigner", "Recent Citizen", "Average Singaporean", "Singapore Historian", "iBong 14 Pro Max"]
     @State private var difficultyLevel = ""
     @State private var buttons = [ndp_hackathon_app.buttonStyle(buttonText: "Done                                                                 ", paddingAmount: 10.0), ndp_hackathon_app.buttonStyle(buttonText: "Click to Start", paddingAmount: 30.0), ndp_hackathon_app.buttonStyle(buttonText: "Finish Quiz", paddingAmount: 50.0), ndp_hackathon_app.buttonStyle(buttonText: "", paddingAmount: 0.0)]
     
     var body: some View {
         ZStack {
+            Color(red: 1, green: 0.9, blue: 0.9)
             VStack {
                 
                 if screenNum == 0 {
@@ -62,8 +64,11 @@ struct ContentView: View {
                         .cornerRadius(20)
                 }
             }
+            if blackScreen == true {
+                Color(.black)
+            }
         }
-        .background(Color(red: 1, green: 0.9, blue: 0.9))
+        .background(blackScreen == true ? .black : Color(red: 1, green: 0.9, blue: 0.9))
     }
 }
 
