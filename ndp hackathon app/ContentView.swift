@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var questions: [Question] = [questions: "What year did Singapore gain independence and celebrate its first National Day?", answer: "Singapore gained independence on August 9, 1965"]
     @State private var nameEntered = ""
     @State private var nricEntered = ""
     @State private var ccnEntered = ""
