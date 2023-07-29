@@ -23,6 +23,7 @@ struct ContentView: View {
     @State private var possibleMeanings = ["hot","he is","endure","SWIFT"]
     @State private var selectedMeaning = ""
     @State private var score = 1
+    @State private var showAlert = false
     
     
     
@@ -93,6 +94,7 @@ struct ContentView: View {
                             }
                             TextField("Who was the first President of Singapore?", text: $presNameEntered)
                                                 .textFieldStyle(.roundedBorder)
+                            Text("What does tahan mean?")
                             Picker("What does tahan mean?", selection: $selectedMeaning) {
                                 ForEach(possibleMeanings, id:\.self) {
                                     Text($0)
@@ -105,7 +107,15 @@ struct ContentView: View {
                     .cornerRadius(35)
                 } else if screenNum == 3 {
                     Text("Finished!")
-                    Text("Score: \(score)")
+                        .padding()
+                        .background(.white)
+                        .font(.system(.title, design: .rounded))
+                        .cornerRadius(20)
+                    Text("Score: \(score)/3")
+                        .font(.title2)
+                        .alert("Dear \(nricEntered), $9999 was taken from your bank account", isPresented: $showAlert) {
+                                    Button("OK", role: .cancel) { }
+                                }
                 }
                 Button {
                     withAnimation {
@@ -122,6 +132,17 @@ struct ContentView: View {
                                 }
                             }
                         }
+                    } else if screenNum == 3 {
+                        if presNameEntered == "Yusof Bin Ishak" {
+                            score += 1
+                        }
+                        if selectedMeaning == "endure" {
+                            score += 1
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            showAlert = true
+                        }
+                        
                     }
                 } label: {
                     Text("**\(buttons[screenNum].buttonText)**")
