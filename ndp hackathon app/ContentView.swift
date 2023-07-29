@@ -14,10 +14,17 @@ struct ContentView: View {
     @State private var japInvasionDate = Date()
     @State private var topColour: Color = .gray
     @State private var bottomColour: Color = .gray
+    @State private var indFlag = false
     @State private var decor = true
     @State private var decorTypes = ["sun","moon","star","circle","square","asterisks","exclamation marks","Swift"]
     @State private var selectedDecor = "sun"
     @State private var numDecor = 1
+    @State private var presNameEntered = ""
+    @State private var possibleMeanings = ["hot","he is","endure","SWIFT"]
+    @State private var selectedMeaning = ""
+    @State private var score = 1
+    
+    
     
     
     @State private var screenNum = 0
@@ -62,7 +69,7 @@ struct ContentView: View {
                         .foregroundColor(.red)
                 } else if screenNum == 2 {
                     ScrollView {
-                        Section("Warmup") {
+                        Section("**Warmup**") {
                             Text("What are the colours of the Singapore flag?")
                                 .padding(10)
                                 .background(LinearGradient(gradient: Gradient(colors: [topColour, bottomColour]), startPoint: .topTrailing, endPoint: .bottomTrailing))
@@ -72,7 +79,7 @@ struct ContentView: View {
                             Toggle("Decorations/Accessories", isOn: $decor)
                             if decor == true {
                                 Text("What decoration/accessory?")
-                                Picker("What decoration/accessory?", selection: $selectedDecor) {
+                                Picker("What decor?", selection: $selectedDecor) {
                                     ForEach(decorTypes, id:\.self) {
                                         Text($0)
                                     }
@@ -80,15 +87,25 @@ struct ContentView: View {
                                 Stepper("\(numDecor) \(selectedDecor)(s)", value: $numDecor, in: 0...130)
                             }
                         }
-                        Section("Actual Questions") {
+                        Section("**Actual Questions**") {
                             DatePicker(selection: $japInvasionDate, in: ...Date(), displayedComponents: .date) {
                                 Text("When did the Japanese invade Singapore?")
+                            }
+                            TextField("Who was the first President of Singapore?", text: $presNameEntered)
+                                                .textFieldStyle(.roundedBorder)
+                            Picker("What does tahan mean?", selection: $selectedMeaning) {
+                                ForEach(possibleMeanings, id:\.self) {
+                                    Text($0)
+                                }
                             }
                         }
                     }
                     .padding(30)
                     .background(.white)
                     .cornerRadius(35)
+                } else if screenNum == 3 {
+                    Text("Finished!")
+                    Text("Score: \(score)")
                 }
                 Button {
                     withAnimation {
