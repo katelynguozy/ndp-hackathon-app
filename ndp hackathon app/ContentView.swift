@@ -15,6 +15,10 @@ struct ContentView: View {
     @State private var topColour: Color = .gray
     @State private var bottomColour: Color = .gray
     @State private var decor = true
+    @State private var decorTypes = ["sun","moon","star","circle","square","asterisks","exclamation marks","Swift"]
+    @State private var selectedDecor = "sun"
+    @State private var numDecor = 1
+    
     
     @State private var screenNum = 0
     @State private var blackScreen = false
@@ -57,7 +61,7 @@ struct ContentView: View {
                         .font(.system(.largeTitle, design: .rounded))
                         .foregroundColor(.red)
                 } else if screenNum == 2 {
-                    Form {
+                    ScrollView {
                         Section("Warmup") {
                             Text("What are the colours of the Singapore flag?")
                                 .padding(10)
@@ -66,6 +70,15 @@ struct ContentView: View {
                             ColorPicker("Colour 1 (top)", selection: $topColour)
                             ColorPicker("Colour 2 (bottom)", selection: $bottomColour)
                             Toggle("Decorations/Accessories", isOn: $decor)
+                            if decor == true {
+                                Text("What decoration/accessory?")
+                                Picker("What decoration/accessory?", selection: $selectedDecor) {
+                                    ForEach(decorTypes, id:\.self) {
+                                        Text($0)
+                                    }
+                                }
+                                Stepper("\(numDecor) \(selectedDecor)(s)", value: $numDecor, in: 0...130)
+                            }
                         }
                         Section("Actual Questions") {
                             DatePicker(selection: $japInvasionDate, in: ...Date(), displayedComponents: .date) {
@@ -73,6 +86,8 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .padding(30)
+                    .background(.white)
                     .cornerRadius(35)
                 }
                 Button {
